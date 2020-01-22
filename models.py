@@ -6,7 +6,8 @@ import jwt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app = Flask("__name__")
-app.config.from_pyfile('config.cfg')
+app.config.from_object('settings')
+# app.config.from_pyfile('config.cfg')
 db = SQLAlchemy(app)
 
 class Book(db.Model):
