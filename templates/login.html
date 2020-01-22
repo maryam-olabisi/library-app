@@ -1,0 +1,67 @@
+{% extends 'layout-others.html' %}
+{% block title %}
+<title> SIGN IN - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<section class="main-section contact" id="borrow">
+		<div class="row">
+			<div class="col-lg-6 col-sm-7 wow fadeInLeft">
+				<div class="form">
+                        <div class="row text-center"><h3>SIGN IN</h3></div>
+                    
+                    <div id="errormessage"><p class="text text-danger text-center">{{error}}</p></div>
+                    <form action="/login" method="POST" role="form" class="loginForm">
+                        <div class="form-group">
+                            <input type="text" name="userid" class="form-control input-text" id="userid" placeholder="Matric Number/Staff ID" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                                <input type="password" class="form-control input-text" name="password" id="password" placeholder="Password" data-rule="minlen:6" data-msg="Please enter at least 6 chars of subject" />
+                        </div>
+                        <div class="text-center"><button type="submit" class="input-btn">LOG IN</button></div>
+					</form>
+					<br><br>
+                </div>
+			</div>
+			<div class="col-lg-6 col-sm-5 wow fadeInUp delay-05s">
+				<div class="form">
+					<div class="row text-center"><h3>FIRST TIME? REGISTER</h3></div>
+					<div><p id="successmessage" class="text text-success">{{success}}</p></div>
+					<div><p class="text text-danger text-center">{{error}}</p></div>
+					<!-- <div><p id="errormessage" class="alert alert-error">{{error}}</p></div> -->
+					<form action="/register" method="post" role="form" class="registerForm">
+						<div class="form-group">
+							<input type="text" name="name" class="form-control input-text" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+							<div class="validation"></div>
+						</div>
+						<div class="form-group">
+							<input type="text"  class="form-control input-text" name="userid" id="userid" placeholder="Matric Number/Staff Id" data-rule="minlen:6" data-msg="Please enter at least 6 characters" />
+							<div class="validation"></div>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control input-text" name="phone" id="phone" placeholder="Your Phone Number" data-rule="minlen:11" data-msg="Please enter a valid Phone Number" />
+							<div class="validation"></div>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control input-text" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+							<div class="validation"></div>
+						</div>
+						<div>
+							<datalist id="department">
+								{% for dept in allDepts %}
+								<option value="{{dept.dept_name}}">
+								{% endfor %}
+							</datalist>
+							<input type="text" list="department" class="form-control input-text" name="ldepartment" id="ldepartment" placeholder="Department"
+								required>
+						</div>
+						<div class="text-center"><button type="submit" class="input-btn">Register</button></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'layout-trans.html' %}
+{% block title %}
+<title> ADMIN - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<section class="main-section" id="user">
+    <div class="container">
+        <h2>User</h2>
+        <h6>View User Information</h6>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInLeft delay-05s">
+                <div class="service-list">
+                    <div class="service-list-col1">
+                            <i class="fa fa-pen"></i>
+                    </div>
+                    <div class="service-list-col2">
+                        <div>
+                            <datalist id="user">
+                                {% for u in allUsers %}
+                                <option value="{{u.user_phone_number}}">{{u.user_phone_number}}</option>
+                                {% endfor %}
+                            </datalist>
+                            <input type="text" list="user" class="form-control input-text" name="luser" id="luser" placeholder="Phone Number"
+                                required>
+                        </div>
+                        <div>
+                            <p>Transactions</p>
+                            {% for t in uTrans %}
+                            <p class="">{{t.trans_date}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <figure class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
+                <div class="row text-center"><h3>Details</h3></div>
+                        <div><p id="successmessage" class="text text-success">{{edept_success}}</p></div>
+                        <div><p class="text text-danger text-center">{{edept_error}}</p></div>
+                        <div class="service-list">
+                            <div class="service-list-col1">
+                                    <i class="fa fa-pen"></i>
+                            </div>
+                            <div class="service-list-col2 pull-left">
+                                <p>Name: </p>
+                                <p>Staff Id/Matric Number:</p>
+                                <p>Phone Number:</p>
+                                <p>Email Address:</p>
+                                <p>Department:</p>
+                            </div>
+                        </div>
+            </figure>
+
+        </div>
+    </div>
+</section>
+
+<section class="main-section" id="borrow">
+    <div class="container">
+        <h2>Borrow</h2>
+        <h6>Borrow Library Books</h6>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInLeft delay-05s">
+                <div class="service-list">
+                    <div class="service-list-col1">
+                            <i class="fa fa-pen"></i>
+                    </div>
+                    <div class="service-list-col2">
+                        <div>
+                            <datalist id="books">
+                                {% for book in allUsers %}
+                                <option value="{{b.book_name}}">{{u.user_phone_number}}</option>
+                                {% endfor %}
+                            </datalist>
+                            <input type="text" list="bookd" class="form-control input-text" name="lbooks" id="lbooks" placeholder="Select Books"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <figure class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
+                <div class="row text-center"><h3>Details</h3></div>
+                        <div><p id="successmessage" class="text text-success">{{edept_success}}</p></div>
+                        <div><p class="text text-danger text-center">{{edept_error}}</p></div>
+                        <div class="service-list">
+                            <div class="service-list-col1">
+                                    <i class="fa fa-pen"></i>
+                            </div>
+                            <div class="service-list-col2 pull-left">
+                                <p>Name: </p>
+                                <p>Staff Id/Matric Number:</p>
+                                <p>Phone Number:</p>
+                                <p>Email Address:</p>
+                                <p>Department:</p>
+                            </div>
+                        </div>
+            </figure>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
