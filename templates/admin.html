@@ -4,142 +4,82 @@
 {% endblock %}
 
 {% block body %}
-<!-- <div class="row"> -->
-   
-<!-- </div> -->
 <section class="main-section" id="dept">
-    <!--main-section-start-->
     <div class="container">
-        <h2>Departments</h2>
-        <h6>Add, View & Edit Department Information</h6>
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInLeft delay-05s">
+            <div class="col-lg-5 col-md-5 col-sm-5 wow fadeInLeft delay-05s">
+                <h2>Departments</h2>
+                <h6>Add Department Information</h6>
                 <div class="service-list">
                     <div class="service-list-col1">
                             <i class="fa fa-pen"></i>
                     </div>
                     <div class="service-list-col2">
-                        <div class="row text-center"><h3>New Department</h3></div>
-                        <div><p class="text text-success text-center">{{dept_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{dept_error}}</p></div>
                         <form action="/adddept" method="post" role="form" class="registerForm">
-                            <div class="form-group">
-                                <input type="text" name="deptname" class="form-control input-text" id="deptname" placeholder="Department Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div>
+                                <datalist id="department">
+                                    {% for dept in allDepts %}
+                                    <option value="{{dept.dept_name}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                                <input type="text" list="department" class="form-control input-text" name="deptname" id="deptname" placeholder="Department" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                                    required>
                                 <div class="validation"></div>
                             </div>
                             <div class="text-center"><button type="submit" class="input-btn">Add</button></div>
                         </form>
                     </div>
                 </div>
+                <a href="/details" class="pull-right">View All</a>
             </div>
-            <figure class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
-                <div class="row text-center"><h3>View Department</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{edept_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{edept_error}}</p></div>
-                <form action="/editdept" method="post" role="form" class="registerForm">
-                    <div>
-                        <datalist id="department">
-                            {% for dept in allDepts %}
-                            <option value="{{dept.dept_name}}"></option>
-                            {% endfor %}
-                        </datalist>
-                        <input type="text" list="department" class="form-control input-text" name="ldepartment" id="ldepartment" placeholder="Department"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="edeptname" class="form-control input-text" id="edeptname" value="{{ldepartment}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <p id="depfbooks" class="pull-left">Books: </p>
-                    <p id="deptusers">Users: </p>        
-                    
-                    <div class="text-center"><button type="submit" class="input-btn">Update</button></div>
-                </form>
-            </figure>
-
-        </div>
-    </div>
-</section>
-
-<section class="main-section alabaster" id="subj">
-    <!--main-section alabaster-start-->
-    <div class="container">
-        <div class="row">
-            <h2>Subjects</h2>
-            <h6>Add, View and Edit Subjects Information</h6>
-            <div class="col-lg-6 col-sm-6 wow fadeInLeft">
+            <div class="col-lg-5 col-lg-offset-2 col-sm-5 col-offset-2 col-sm-offset-2 col-md-5 wow fadeInLeft">
+                <h2>Subjects</h2>
+                <h6>Add Subject Information</h6>
                 <div class="featured-box">
                     <div class="featured-box-col1 wow fadeInRight delay-02s">
                         <i class="fa fa-pen"></i>
                     </div>
                     <div class="featured-box-col2 wow fadeInRight delay-02s">
-                        <div class="row text-center"><h3>New Subject</h3></div>
-                        <div><p class="text text-success text-center">{{subj_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{subj_error}}</p></div>
                         <form action="/addsubj" method="post" role="form" class="registerForm">
-                            <div class="form-group">
-                                <input type="text" name="subjname" class="form-control input-text" id="subjname" placeholder="Subject Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validation"></div>
+                            <div>
+                                <datalist id="subject">
+                                    {% for subj in allSubj %}
+                                    <option value="{{subj.subject_name}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                                <input type="text" list="subject" class="form-control input-text" name="subjname" id="subjname" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                                    required>
+                                    <div class="validation"></div>
                             </div>
                             <div class="text-center"><button type="submit" class="input-btn">Add</button></div>
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 featured-work">
-                <div class="featured-box">
-                    <div class="featured-box-col1 wow fadeInRight delay-02s">
-                        <i class="fa fa-pen"></i>
-                    </div>
-                    <div class="featured-box-col2 wow fadeInRight delay-02s">
-                        <div class="row text-center"><h3>View Subjects</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{esubj_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{esubj_error}}</p></div>
-                <form action="/editdept" method="post" role="form" class="registerForm">
-                    <div>
-                        <datalist id="subject">
-                            {% for subj in allSubj %}
-                            <option value="{{subj.subject_name}}"></option>
-                            {% endfor %}
-                        </datalist>
-                        <input type="text" list="subject" class="form-control input-text" name="lsubjects" id="lsubjects" placeholder="Subject"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="esubjname" class="form-control input-text" id="esubjname" value="{{lsubjects}}" data-rule="minlen:3" data-msg="Please enter at least 3 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <p class="pull-left">Books: </p>                    
-                    <div class="text-center"><button type="submit" class="input-btn">Update</button></div>
-                </form>
-                    </div>
-                </div>
-                
-                <a class="Learn-More" href="#">Learn More</a>
+                <a href="/details" class="pull-right">View All</a>
             </div>
         </div>
     </div>
 </section>
 
 <section class="main-section" id="pub">
-    <!--main-section-start-->
     <div class="container">
-        <h2>Publishers</h2>
-        <h6>Add, View & Edit Publishing House Information</h6>
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInLeft delay-05s">
+            <div class="col-lg-5 col-md-5 col-sm-5 wow fadeInLeft delay-05s">
+                <h2>Publishers</h2>
+                <h6>Add Publishing House Information</h6>
                 <div class="service-list">
                     <div class="service-list-col1">
                             <i class="fa fa-pen"></i>
                     </div>
                     <div class="service-list-col2">
-                        <div class="row text-center"><h3>New Publisher</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{pub_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{pub_error}}</p></div>
                         <form action="/addpub" method="post" role="form" class="registerForm">
-                            <div class="form-group">
-                                <input type="text" name="pubname" class="form-control input-text" id="pubname" placeholder="Publisher Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validation"></div>
+                            <div>
+                                <datalist id="publisher">
+                                    {% for pub in allPubs %}
+                                    <option value="{{pub.pub_name}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                                <input type="text" list="publisher" class="form-control input-text" name="pubname" id="pubname" placeholder="Publisher" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="pubadd" class="form-control input-text" id="pubadd" placeholder="Publisher Address" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -149,251 +89,33 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
-                <div class="row text-center"><h3>View Publisher</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{epub_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{epub_error}}</p></div>
-                <form action="/editpub" method="post" role="form" class="registerForm">
-                    <div>
-                        <datalist id="publisher">
-                            {% for pub in allPubs %}
-                            <option value="{{pub.pub_name}}"></option>
-                            {% endfor %}
-                        </datalist>
-                        <input type="text" list="publisher" class="form-control input-text" name="lpublisher" id="lpublisher" placeholder="Publisher"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="epubname" class="form-control input-text" id="epubname" value="{{lpublisher}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="edeptadd" class="form-control input-text" id="edeptadd" value="{{lpublisher}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <p class="pull-left">Books: </p>
-                    
-                    <div class="text-center"><button type="submit" class="input-btn">Update</button></div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="main-section alabaster" id="author">
-    <!--main-section alabaster-start-->
-    <div class="container">
-        <div class="row">
-            <h2>Authors</h2>
-            <h6>Add, View and Edit Author Information</h6>
-            <div class="col-lg-6 col-sm-6 wow fadeInLeft">
+                <a href="/details" class="pull-right">View All</a>
+            </div>            
+            <div class="col-lg-offset-2 col-lg-5 col-md-offset-2 col-sm-5 col-sm-offset-2 col-md-5 wow fadeInLeft">
+                <h2>Authors</h2>
+                <h6>Add Author Information</h6>
                 <div class="featured-box">
-                    <div class="featured-box-col1 wow fadeInRight delay-02s">
+                    <div class="featured-box-col1 wow fadeInUp delay-02s">
                         <i class="fa fa-pen"></i>
                     </div>
                     <div class="featured-box-col2 wow fadeInRight delay-02s">
-                        <div class="row text-center"><h3>New Author</h3></div>
-                        <div><p id="" class="text text-success">{{auth_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{auth_error}}</p></div>
                         <form action="/addauthor" method="post" role="form" class="registerForm">
-                            <div class="form-group">
-                                <input type="text" name="authorname" class="form-control input-text" id="authorname" placeholder="Author Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="text-center"><button type="submit" class="input-btn">Add</button></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 featured-work">
-                <div class="featured-box">
-                    <div class="featured-box-col1 wow fadeInRight delay-02s">
-                        <i class="fa fa-pen"></i>
-                    </div>
-                    <div class="featured-box-col2 wow fadeInRight delay-02s">
-                        <div class="row text-center"><h3>View Authors</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{eauth_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{eauth_error}}</p></div>
-                <form action="/editauthor" method="post" role="form" class="registerForm">
-                    <div>
-                        <datalist id="author">
-                            {% for auth in allAuthors %}
-                            <option value="{{auth.author_name}}"></option>
-                            {% endfor %}
-                        </datalist>
-                        <input type="text" list="author" class="form-control input-text" name="lauthors" id="lauthors" placeholder="Author"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="eauthname" class="form-control input-text" id="eauthname" value="{{lauthors}}" data-rule="minlen:3" data-msg="Please enter at least 3 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <p class="pull-left">Books: </p>                    
-                    <div class="text-center"><button type="submit" class="input-btn">Update</button></div>
-                </form>
-                    </div>
-                </div>
-                
-                <a class="Learn-More" href="#">Learn More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="main-section" id="books">
-    <!--main-section-start-->
-    <div class="container">
-        <h2>Books</h2>
-        <h6>Add, View & Edit Book Information</h6>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInLeft delay-05s">
-                <div class="service-list">
-                    <div class="service-list-col1">
-                            <i class="fa fa-pen"></i>
-                    </div>
-                    <div class="service-list-col2">
-                        <div class="row text-center"><h3>New Books</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{book_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{book_error}}</p></div>
-                        <form action="/addbook" method="post" role="form" class="registerForm">
-                            <div class="form-group">
-                                <input type="text" name="bookname" class="form-control input-text" id="bookname" placeholder="Book Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validation"></div>
-                            </div>
                             <div>
-                                <select id="booksource" class="form-control input-text" name="booksource">
-                                    <option value="">Book Source</option>
-                                    <option value="Donation">Donation</option>
-                                    <option value="Purchase">Purchase</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="bookyear" class="form-control input-text" id="bookyear" placeholder="Year of Publication" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="isbn" class="form-control input-text" id="isbn" placeholder="ISBN/ISSN" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="callno" class="form-control input-text" id="callno" placeholder="Call Number" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="pagination" class="form-control input-text" id="pagination" placeholder="Pagination" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="notes" class="form-control input-text" id="notes" placeholder="Book Notes" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="assessionnumber" class="form-control input-text" id="assessionnumber" placeholder="Assession Number" data-rule="minlen:4" data-msg="Assion Numberr too short, enter at least 4 chars" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="bookcopies" class="form-control input-text" id="bookcopies" placeholder="Copies" data-rule="minlen:1" data-msg="Please enter number of copies" />
-                                <div class="validation"></div>
-                            </div>
-                            <div class="form-group">
-                                <select name="authors" class="form-control input-text">
-                                    <option value="">Author</option>
-                                    {% for au in allAuthors %}
-                                    <option value="{{au.id}}">{{au.author_name}}</option>
+                                <datalist id="author">
+                                    {% for auth in allAuthors %}
+                                    <option value="{{auth.author_name}}"></option>
                                     {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="aauthors" class="form-control input-text">
-                                    <option value="">Supporting Author(s)</option>
-                                    <option value="et al">et al</option>
-                                    {% for au in allAuthors %}
-                                    <option value="{{au.id}}">{{au.author_name}}</option>
-                                    {% endfor %}
-                                </select>
+                                </datalist>
+                                <input type="text" list="author" class="form-control input-text" name="authorname" id="authorname" placeholder="Author Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                                    required>
+                                    <div class="validation"></div>
                             </div>
                             <div class="text-center"><button type="submit" class="input-btn">Add</button></div>
                         </form>
                     </div>
                 </div>
+                <a href="/details" class="pull-right">View All</a>
             </div>
-            <figure class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
-                <div class="row text-center"><h3>View Book</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{ebook_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{ebook_error}}</p></div>
-                <form action="/editbook" method="post" role="form" class="registerForm">
-                    <div>
-                        <datalist id="book">
-                            {% for b in allBooks %}
-                            <option value="{{b.book_name}}"></option>
-                            {% endfor %}
-                        </datalist>
-                        <input type="text" list="book" class="form-control input-text" name="lbook" id="lbook" placeholder="Books"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="bookname" class="form-control input-text" id="bookname" placeholder="Book Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <div>
-                        <select id="booksource" class="form-control input-text" name="booksource">
-                            <option value="">Book Source</option>
-                            <option value="Donation">Donation</option>
-                            <option value="Purchase">Purchase</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="bookyear" class="form-control input-text" id="bookyear" placeholder="Year of Publication" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="isbn" class="form-control input-text" id="isbn" placeholder="ISBN/ISSN" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="callno" class="form-control input-text" id="callno" placeholder="Call Number" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="pagination" class="form-control input-text" id="pagination" placeholder="Pagination" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="notes" class="form-control input-text" id="notes" placeholder="Book Notes" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="assessionnumber" class="form-control input-text" id="assessionnumber" placeholder="Assession Number" data-rule="minlen:4" data-msg="Assion Numberr too short, enter at least 4 chars" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="bookcopies" class="form-control input-text" id="bookcopies" placeholder="Copies" data-rule="minlen:1" data-msg="Please enter number of copies" />
-                        <div class="validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <select name="authors" class="form-control input-text">
-                            <option value="">Author</option>
-                            {% for au in allAuthors %}
-                            <option value="{{au.id}}">{{au.author_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select name="aauthors" class="form-control input-text">
-                            <option value="">Supporting Author(s)</option>
-                            <option value="et al">et al</option>
-                            {% for au in allAuthors %}
-                            <option value="{{au.id}}">{{au.author_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>       
-                    
-                    <div class="text-center"><button type="submit" class="input-btn">Update</button></div>
-                </form>
-            </figure>
-
         </div>
     </div>
 </section>

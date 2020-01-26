@@ -50,7 +50,7 @@ def add_subj():
 def add_dept():
     name = request.form.get('deptname')
     try:
-        newDept = Department(name)
+        newDept = Department(name) 
         db.session.add(newDept)
         db.session.commit()
         return True, newDept

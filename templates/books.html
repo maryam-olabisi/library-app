@@ -1,0 +1,110 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> ADMIN - KDU-I Library </title>
+{% endblock %}
+{% block body %}
+<section class="main-section" id="books">
+    <div class="container">
+        <h2>Books</h2>
+        <h6>NEW ARRIVALS</h6>
+        <div><p id="successmessage" class="text text-success">{{book_success}}</p></div>
+        <div><p class="text text-danger text-center">{{book_error}}</p></div>
+        <div class="row">
+            <form action="/books" method="post" role="form" class="registerForm">
+                <div class="col-lg-5 col-md-5 col-sm-5 wow fadeInLeft delay-05s">
+                    <div class="service-list">
+                        <div class="service-list-col1">
+                                <i class="fa fa-pen"></i>
+                        </div>
+                        <div class="service-list-col2">
+                            <div>
+                                <datalist id="book">
+                                    {% for b in allBooks %}
+                                    <option value="{{b.book_name}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                                <input type="text" list="book" class="form-control input-text" name="bookname" id="bookname" placeholder="Book Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                                    required>
+                                    <div class="validation"></div>
+                            </div>
+                            <div>
+                                <select id="booksource" class="form-control input-text" name="booksource">
+                                    <option value="">Book Source</option>
+                                    <option value="Donation">Donation</option>
+                                    <option value="Purchase">Purchase</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="bookyear" class="form-control input-text" id="bookyear" placeholder="Year of Publication" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                            </div>
+                            <div>
+                                <datalist id="publisher">
+                                    {% for pub in allPubs %}
+                                    <option value="{{pub.pub_name}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                                <input type="text" list="publisher" class="form-control input-text" name="pubname" id="pubname" placeholder="Publisher" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-2 col-lg-5 col-md-offset-2 col-md-5 col-sm-offset-2 wow fadeinUp delay-05s">
+                    <div class="form-group">
+                        <datalist id="pubaddress">
+                            {% for add in allPubs %}
+                            <option value="{{add.pub_address}}"></option>
+                            {% endfor %}
+                        </datalist>
+                        <input type="text" list="pubaddress" name="pubadd" class="form-control input-text" id="pubadd" placeholder="Publisher Address" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="bookcopies" class="form-control input-text" id="bookcopies" placeholder="Copies" data-rule="minlen:1" data-msg="Please enter number of copies" />
+                        <div class="validation"></div>
+                    </div>   
+                    <div>
+                        <datalist id="autho">
+                            {% for a in allAuthors %}
+                            <option value="{{a.author_name}}"></option>
+                            {% endfor %}
+                        </datalist>
+                        <input type="text" list="autho" class="form-control input-text" name="authors" id="authors" placeholder="Author" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                            required>
+                            <div class="validation"></div>
+                    </div>
+                    <div>
+                        <datalist id="authoo">
+                            <option value="et al"></option>
+                            {% for a in allAuthors %}
+                            <option value="{{a.author_name}}"></option>
+                            {% endfor %}
+                        </datalist>
+                        <input type="text" list="authoo" class="form-control input-text" name="aauthors" id="aauthors" placeholder="Supporting Author(s)" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                            required>
+                            <div class="validation"></div>
+                    </div>
+                    <div class="text-center"><button type="submit" class="input-btn pull-right">Add</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h2>UPDATE NEW ARRIVALS</h2>
+        <form action="/getbook" method="post" role="form" class="registerForm">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <select id="arrival" class="form-control input-text" name="arrival">
+                <option value="0">Select Arrival</option>
+                {% for b in allBooks %}
+                <option value="{{b.book_id}}">{{b.book_name}}</option>
+                {% endfor %}
+            </select>              
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="text-center"><button type="submit" class="input-btn pull-left">View & Update</button></div>
+        </div>
+    </form>
+    </div>
+</section>
+{% endblock %}

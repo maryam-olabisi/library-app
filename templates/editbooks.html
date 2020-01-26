@@ -1,0 +1,264 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> ADMIN - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<section>
+    <h2 >Book Details</h2>
+    <div class="row">
+        <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-3 col-md-3 col-sm-3">
+            <div class="service-list">
+                <div class="service-list-col1">
+                        <i class="fa fa-pen"></i>
+                </div>
+                <div class="service-list-col2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Name: </label>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label"> {{book.book_name}} </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Authors: </label>
+                        </div>
+                        <div class="col-md-8 ">
+                            <label class="form-label"> {{bookauthor}}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <label class="form-label">Publisher: </label>
+                        </div>
+                        <div class="col-md-8 ">
+                            <label class="form-label"> {{book.publisher.pub_name}} </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <label class="form-label">Place of Publication: </label>
+                        </div>
+                        <div class="col-md-8 ">
+                            <label class="form-label"> {{book.publisher.pub_address}} </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <label class="form-label">Year of Publication: </label>
+                        </div>
+                        <div class="col-md-8 ">
+                            <label class="form-label"> {{book.book_date}} </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Source: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_source}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Total Copies: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_total_copies}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Available Copies: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_avail_copies}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">ISBN/ISSN: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_isbn}} </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Call Number: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_call_no}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Accession Number: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_assession_no}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Pagination: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_pagination}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Notes: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{book.book_notes}} </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <label class="form-label">Subjects: </label>
+                </div>
+                <div class="col-md-8 ">
+                    <label class="form-label"> {{booksubj}} </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<b><hr></b>
+<section class="main-section" >
+    <!--main-section-start-->
+    <div class="container">
+        <h6>Edit Book Information</h6>
+        <div class="row">
+            <form action="/editbook/{{book.book_id}}" method="post" role="form" class="registerForm">
+            <div class="col-lg-6 col-md-6 col-sm-6 ">
+                <div class="service-list">
+                    <div class="service-list-col1">
+                            <i class="fa fa-pen"></i>
+                    </div>
+                    <div class="service-list-col2 col-md-10">
+                        <div class="form-group">
+                            <label for="bookname">Name:</label>
+                            <input type="text" name="bookname" class="form-control input-text" id="bookname" value="{{book.book_name}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                        <div>
+                            <label for="authors">Main Author:</label>
+                            <select id="authors" class="form-control input-text" name="authors">
+                                {% for a in allAuthors %}
+                                {% if a.id == mainAuth %}
+                                <option value="{{a.id}}" selected>{{a.author_name}}</option>
+                                {% else %}
+                                <option value="{{a.id}}">{{a.author_name}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookyear">Year of Publication:</label>
+                            <input type="text" name="bookyear" class="form-control input-text" id="bookyear" value="{{book.book_date}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                        <div>
+                            <label for="pubname">Publisher:</label>
+                            <datalist id="publisher">
+                                {% for pub in allPubs %}
+                                <option value="{{pub.pub_name}}"></option>
+                                {% endfor %}
+                            </datalist>
+                            <input type="text" list="publisher" class="form-control input-text" name="pubname" id="pubname" value="{{book.publisher.pub_name}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="isbn">ISBN/ISSN:</label>
+                            <input type="text" name="isbn" class="form-control input-text" id="isbn" value="{{book.book_isbn}}" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="callno">Call Number:</label>
+                            <input type="text" name="callno" class="form-control input-text" id="callno" value="{{book.book_call_no}}" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes:</label>
+                            <textarea name="notes" class="form-control input-text" id="notes" value="{{book.book_notes}}" rows="2"></textarea>
+                            <div class="validation"></div>
+                        </div>                   
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="service-list-col2 col-md-10">
+                    <div>
+                        <label for="booksource">Source:</label>
+                        <select id="booksource" class="form-control input-text" name="booksource">
+                            <option value="{{book.book_source}}">{{book.book_source}}</option>
+                            <option value="Donation">Donation</option>
+                            <option value="Purchase">Purchase</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="aauthors">Supporting Author(s):</label>
+                        <select id="aauthors" class="form-control input-text" name="aauthors">
+                            <option value="">None</option>
+                            {% for a in allAuthors %}
+                            {% if a.id == supAuth %}
+                            <option value="{{a.id}}" selected>{{a.author_name}}</option>
+                            {% else %}
+                            <option value="{{a.id}}">{{a.author_name}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookcopies">Copies:</label>
+                        <input type="text" name="bookcopies" class="form-control input-text" id="bookcopies" value="{{book.book_total_copies}}" data-rule="minlen:1" data-msg="Please enter number of copies" />
+                        <div class="validation"></div>
+                    </div>   
+                    <div class="form-group">
+                        <label for="pubadd">Place of Publication:</label>
+                        <datalist id="pubaddress">
+                            {% for add in allPubs %}
+                            <option value="{{add.pub_address}}"></option>
+                            {% endfor %}
+                        </datalist>
+                        <input type="text" list="pubaddress" name="pubadd" class="form-control input-text" id="pubadd" value="{{book.publisher.pub_address}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pagination">Pagination:</label>
+                        <input type="text" name="pagination" class="form-control input-text" id="pagination" value="{{book.book_pagination}}" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="assessionnumber">Accession Number:</label>
+                        <input type="text" name="assessionnumber" class="form-control input-text" id="assessionnumber" value="{{book.book_assession_no}}" data-rule="minlen:4" data-msg="Accession Number too short, enter at least 4 chars" />
+                        <div class="validation"></div>
+                    </div> 
+                    <div>
+                        <label for="subj">Subjects: (Hold ctrl to Select Many)</label>
+                        <select id="lsubjects" class="form-control input-text" name="lsubjects" multiple>
+                            {% for subj in allSubj %}
+                            {% if subj in bookSubjList %}<option value="{{subj.id}}" selected>{{subj.subject_name}}</option>
+                            {%else%}<option value="{{subj.id}}">{{subj.subject_name}}</option>{% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- <div class="text-center"><a herf="/editbook/{{book.book_id}}" type="submit"  class="btn btn-primary input-btn pull-right">Update</a></div> -->
+                    <input type="submit" name="submit" id="submit" value="Update" class="btn wow tada btn-embossed input-btn btn-primary pull-right">
+                </div>         
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

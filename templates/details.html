@@ -1,0 +1,56 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> ADMIN - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<section class="main-section">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3" style="text-align:left;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><label><b><a onclick="show_dept()">All Departments</a></b></label>
+                </li>
+                <li class="list-group-item"><label><b><a onclick="show_subj()">All Subjects</a></b></label>
+                </li><labe class="list-group-item"l><b><a onclick="show_pub()">All Publishers</a></b></labe class="list-group-item"l></li>
+                <li class="list-group-item"><label><b><a onclick="show_author()">All Authors</a></b></label></li>
+            </ul>
+        </div>
+        <div class="col-lg-offset-1 col-lg-8 col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-8">
+            <section id="dept" style="display:block;">
+                <ol class="list-group">
+                    {% for dept in allDepts %}
+                    <li class="list-group-item" >{{dept.dept_name}} <span>{{dept.dept}}</span></li>
+                    {% endfor %}
+                </ol>
+            </section>
+            <section id="subj" style="display:none;">
+                <ol class="list-group">
+                    {% for sub in allSubj %}
+                    <li class="list-group-item" >{{sub.subject_name}}</li>
+                    {% endfor %}
+                </ol>
+            </section>
+            <section id="pub" style="display:none;">
+                <ol class="list-group">
+                    {% for pub in allPubs %}
+                    <li class="list-group-item" >{{pub.pub_name}}, {{pub.pub_address}}</li>
+                    {% endfor %}
+                </ol>
+            </section>
+            <section id="author" style="display:none;">
+                <ol class="list-group">
+                    {% for aut in allAuthors %}
+                    {% if aut.author_name == "et al" %}
+                    {% else %}
+                    <li class="list-group-item" >{{aut.author_name}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ol>
+            </section>
+        </section>
+    </div>
+</div>
+</section>
+{% include 'includes/_showdetails.html' %}
+{% endblock %}
