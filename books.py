@@ -21,22 +21,21 @@ def book_form():
 
 def new_book():
     bookname, booksource, bookyear, pubname, pubadd, bookcopies, author, aauthor = book_form()
-    pub_id = ""
+    pub_id = "" 
     auth_id = []
-    bookExists = Book.query.filter_by(book_name=bookname,book_date=bookyear,book_source=booksource,pub_id=pubname).first()
+    pubExists = Publisher.query.filter_by(pub_name=pubname,pub_address=pubadd).first()
+    if pubExists:
+        pub_id = pubExists.id
+    else:
+        newPub = Publisher(pubname, pubadd)
+        db.session.add(newPub)
+        db.session.commit()
+        pub_id = newPub.id
+
+    bookExists = Book.query.filter_by(book_name=bookname,book_date=bookyear,book_source=booksource,pub_id=pub_id).first()
     if bookExists:
         return False, "exists"
     else:
-        #check publisher and get publisher id
-        pubExists = Publisher.query.filter_by(pub_name=pubname,pub_address=pubadd).first()
-        if pubExists:
-            pub_id = pubExists.id
-        else:
-            newPub = Publisher(pubname, pubadd)
-            db.session.add(newPub)
-            db.session.commit()
-            pub_id = newPub.id
-        #check author and get author id
         authorExists = Author.query.filter_by(author_name=author).first()
         if authorExists:
             auth_id.append(authorExists)
