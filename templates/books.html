@@ -94,7 +94,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <select id="arrival" class="form-control input-text" name="arrival">
                 <option value="0">Select Arrival</option>
-                {% for b in allBooks %}
+                {% for b in newArrivals %}
                 <option value="{{b.book_id}}">{{b.book_name}}</option>
                 {% endfor %}
             </select>              
