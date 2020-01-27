@@ -55,8 +55,8 @@ def addDept():
     if (request.method=='POST'):
         email = current_user.user_mail
         status, result = add_dept()
-        dept_success = ""
-        dept_error = ""
+        msg_success = ""
+        msg_error = ""
         allDepts = Department.query.all()
         if status:
             # true
