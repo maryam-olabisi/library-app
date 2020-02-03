@@ -3,6 +3,7 @@ from models import *
 from authentication import *
 from department import *
 from books import *
+from periodicals import *
 import datetime 
 
 app = Flask("__name__")
@@ -19,6 +20,7 @@ allSubj = Subject.query.all()
 allAuthors = Author.query.all()
 allPubs = Publisher.query.all()
 allBooks = Book.query.all()
+allPeriodicals = Periodicals.query.all()
 currentYear = str(datetime.datetime.today().year)
 
 @login_manager.user_loader
@@ -190,6 +192,44 @@ def details():
     email = current_user.user_mail
     allSubj = Subject.query.all()
     return render_template('details.html', email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+
+@app.route('/periodicals', methods=['GET','POST'])
+@login_required
+def periodicals():
+    email = current_user.user_mail
+    allSubj = Subject.query.all()
+    if (request.method == "POST"):
+        msg_success = ''
+        status = add_period()
+        if status:
+            msg_success = "Periodical Added Successfully"
+        else:
+            msg_success = "AN Error Occurred"
+        return render_template('periodicals.html', allPeriodicals=allPeriodicals, msg_success=msg_success, lMonth=lMonth, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    return render_template('periodicals.html', allPeriodicals=allPeriodicals, lMonth=lMonth, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+
+@app.route('/periodicals/<id>', methods=['GET','POST'])
+@login_required
+def get_periodicals(id):
+    email = current_user.user_mail
+    allSubj = Subject.query.all()
+    period = get_period(id)
+    msg_error = ''
+    msg_success = ''
+    if period is None:
+            msg_error = "Periodical Not Found"
+            return render_template('periodicals.html', allPeriodicals=allPeriodicals, msg_error=msg_error, lMonth=lMonth, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    if (request.method == "POST"):
+        status, period = update_period(id)
+        if status:
+            msg_success = "Update Successful"
+            return render_template('periodicalDetails.html', period=period, msg_error=msg_error, msg_success=msg_success, lMonth=lMonth, email=email, currentYear=currentYear)
+        else:
+            msg_error = "Periodical Not Found"
+            return render_template('periodicals.html', allPeriodicals=allPeriodicals, msg_success=msg_success, lMonth=lMonth, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+
+        return render_template('periodicalDetails.html', period=period, msg_error=msg_error, msg_success=msg_success, lMonth=lMonth, email=email, currentYear=currentYear)
+    return render_template('periodicalDetails.html', period=period, msg_error=msg_error, msg_success=msg_success, lMonth=lMonth, email=email, currentYear=currentYear)
 
 @app.route('/register', methods=['POST'])
 def register():

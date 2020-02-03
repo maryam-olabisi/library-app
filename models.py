@@ -5,10 +5,32 @@ from sqlalchemy import exc, text
 import jwt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
+
 app = Flask("__name__")
-app.config.from_object('settings')
+app.config.from_objects('settings')
 # app.config.from_pyfile('config.cfg')
 db = SQLAlchemy(app)
+
+migrate = Migrate(app,db)
+manager = Manager(app,db)
+manager.add_command('db', MigrateCommand)
+
+class Periodicals(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    periodical_name =  db.Column(db.String(500), unique=False)
+    periodical_day = db.Column(db.String(5), unique=False)
+    periodical_month = db.Column(db.String(5), unique=False)
+    periodical_year = db.Column(db.String(5), unique=False)
+    periodical_details = db.Column(db.String(2500), unique=False)
+
+    def __init__(self, periodical_name, periodical_day, periodical_month, periodical_year, periodical_details):
+        self.periodical_name = periodical_name
+        self.periodical_day = periodical_day
+        self.periodical_year = periodical_year
+        self.periodical_month = periodical_month
+        self.periodical_details = periodical_details
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -133,4 +155,5 @@ booksbydepartment = db.Table('booksbydepartment',
 )
 
 if __name__ == "__main__":
-    db.create_all()
+    manager.run()
+    # db.create_all()

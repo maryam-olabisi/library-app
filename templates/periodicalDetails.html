@@ -1,0 +1,88 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> ADMIN - KDU-I Library </title>
+{% endblock %}
+{% block body %}
+<section class="main-section">
+    <div class="container">
+        <label><a href="/periodicals">&lt; Back</a></label>
+        <h2>PERIODICALS</h2>
+        <h6>VIEW AND UPDATE PERIODICALS</h6>
+        <div class="row">
+            <form action="" method="post" role="form" class="registerForm">
+                <div class="col-lg-5 col-md-5 col-sm-5 wow delay-05s">
+                    <div class="service-list">
+                        <div class="service-list-col1">
+                                <i class="fa fa-pen"></i>
+                        </div>
+                        <div class="service-list-col2">
+                            <div>
+                                <label for="newsname">Name:</label>
+                                <datalist id="newspaper">
+                                    <option value="The Guardian"></option>
+                                    <option value="The Punch"></option>
+                                    <option value="Tribune"></option>
+                                </datalist>
+                                <input type="text" list="newspaper" class="form-control input-text" name="newsname" id="newsname" value="{{period.periodical_name}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                                    required>
+                                    <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="headlines">Headlines:</label>
+                                <textarea name="headlines" class="form-control input-text" id="headlines" value="{{period.periodical_details}}" rows="3">{{period.periodical_details}}</textarea>
+                                <div class="validation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-2 col-lg-5 col-md-offset-2 col-md-5 col-sm-offset-2 delay-05s">
+                    <div class="service-list">
+                        <div class="service-list-col1">
+                                <i class="fa fa-pen"></i>
+                        </div>
+                        <div class="service-list-col2">
+                            <div >
+
+                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <label for="day">Day:</label>
+                                    <datalist id="lday">
+                                        {% for i in range(1,32) %}
+                                        <option value="{{i}}"></option>
+                                        {% endfor %}
+                                    </datalist>
+                                    <input type="text" list="lday" class="form-control input-text" name="day" id="day" value="{{period.periodical_day}}" data-rule="minlen:1" data-msg="Invalid Day of the Month"
+                                        required>
+                                        <div class="validation"></div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <label for="month">Month:</label>
+                                    <datalist id="lmonth">
+                                        {% for i in lMonth %}
+                                        <option value="{{i}}"></option>
+                                        {% endfor %}
+                                    </datalist>
+                                    <input type="text" list="lmonth" class="form-control input-text" name="month" id="month" value="{{period.periodical_month}}" data-rule="minlen:2" data-msg="Invalid Month of the Year"
+                                        required>
+                                        <div class="validation"></div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <label for="year">Year:</label>
+                                    <datalist id="lyear">
+                                        {% for i in range(2014,2041) %}
+                                        <option value="{{i}}"></option>
+                                        {% endfor %}
+                                    </datalist>
+                                    <input type="text" list="lyear" class="form-control input-text" name="year" id="year" value="{{period.periodical_year}}" data-rule="minlen:4" data-msg="Invalid Year"
+                                        required>
+                                        <div class="validation"></div>
+                                </div>
+                            </div>
+                            <input style="margin-top: 20%;" type="submit" name="submit" id="submit" value="Update Periodical" class="btn wow tada btn-embossed input-btn btn-primary pull-right">
+                        </div>
+                    </div>
+                </div>         
+            </form>
+        </div>        
+    </div>
+</section>
+{% endblock %}

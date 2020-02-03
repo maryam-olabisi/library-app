@@ -6,6 +6,8 @@ import datetime
 #new arrival list
 newArrivals = Book.query.filter_by(book_assession_no="").all()
 
+lMonth = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+
 #middleware
 def book_form():
     bookname = request.form.get('bookname')
