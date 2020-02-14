@@ -7,8 +7,8 @@ from periodicals import *
 import datetime 
 
 app = Flask("__name__")
-app.config.from_object('settings')
-# app.config.from_pyfile('config.cfg')
+# app.config.from_object('settings')
+app.config.from_pyfile('config.cfg')
 db.init_app(app)
 
 login_manager = LoginManager()
@@ -26,6 +26,12 @@ currentYear = str(datetime.datetime.today().year)
 @login_manager.user_loader
 def load_user(username):
     return User.query.get(int(username))
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return render_template('index.html', currentYear=currentYear, allDepts=allDepts)
 
 @app.route('/')
 def homepage():
