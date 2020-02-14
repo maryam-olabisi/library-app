@@ -5,17 +5,17 @@ from sqlalchemy import exc, text
 import jwt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
+# from flask_script import Manager
+# from flask_migrate import Migrate, MigrateCommand
 
 app = Flask("__name__")
 app.config.from_object('settings')
 # app.config.from_pyfile('config.cfg')
 db = SQLAlchemy(app)
 
-migrate = Migrate(app,db)
-manager = Manager(app,db)
-manager.add_command('db', MigrateCommand)
+# migrate = Migrate(app,db)
+# manager = Manager(app,db)
+# manager.add_command('db', MigrateCommand)
 
 class Periodicals(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -155,5 +155,5 @@ booksbydepartment = db.Table('booksbydepartment',
 )
 
 if __name__ == "__main__":
-    manager.run()
-    # db.create_all()
+    # manager.run()
+    db.create_all()
