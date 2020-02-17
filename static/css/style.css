@@ -97,20 +97,20 @@ p{
 
 .header{
 	text-align:center;
-	background:url(../img/pw_maze_black_2X.png) left top repeat;
-	padding:280px 0;
+	background:url(../img/libhead.png) left top no-repeat;
+	padding:220px 0;
 }
 .logo{
 	width:130px;
-	margin:0 auto 35px;
+	margin:0 auto 75px;
 }
 .header h1{
 	font-family: 'Montserrat',sans-serif;
 	font-size:50px;
-	font-weight:400;
+	font-weight:bolder;
 	letter-spacing: -1px;
 	margin:0 0 22px 0 ;
-	color:#fff;
+	color: #fff;
 }
 
 .we-create{
@@ -126,12 +126,13 @@ p{
 	font-size:14px;
 	color: #bcbcbc;
 	text-transform: uppercase;
-	font-weight: 400;
+	font-weight: bold;
 	margin:0 5px 0 0;
 	padding:0 0 0 15px;
 }
 .we-create li:first-child{
 	background:none;
+	font-weight: bolder;
 }
 
 .start-button {
