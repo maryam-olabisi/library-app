@@ -1,9 +1,10 @@
-from flask import Flask,flash, request, render_template, redirect, url_for, session
+from flask import Flask,flash, request, render_template, redirect, url_for, session, json, jsonify
 from models import *
 from authentication import *
 from department import *
 from books import *
 from periodicals import *
+from transactions import *
 import datetime 
 
 app = Flask("__name__")
@@ -136,11 +137,77 @@ def addAuthor():
 @app.route('/getdept')
 @login_required
 def getdept():
-    return render_template('index.hrml')
+    return render_template('index.html')
 
 @app.route('/transactions', methods=['GET','POST'])
+@login_required
 def trans():
+    session.pop('searched_user', None)
+    session.pop('searched_book', None)
+    if (request.method=='POST'):
+        email = current_user.user_mail
+        msg_error = ""
+        status, found_user = user_info()
+        if status:
+            session['searched_user'] = found_user.user_id
+            lstatus, ltrans = trans_list(found_user.user_id)
+            session['searched_status'] = lstatus
+            return render_template('transaction.html', found_user=found_user, lstatus=lstatus, ltrans=ltrans, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+        else:
+            msg_error = found_user
+            return render_template('transaction.html', msg_error=msg_error, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
     return render_template('transaction.html', allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+
+@app.route('/bookTrans', methods=['GET','POST'])
+@login_required
+def book_trans():
+    userid = session.get('searched_user', None)
+    found_user = User.query.filter_by(user_id=userid).first()
+    lstatus, ltrans = trans_list(found_user.user_id)
+    session.pop('searched_trans', None)
+    email = current_user.user_mail
+    # categoryexists = session.get('added_category', None)
+    if request.method == 'POST':
+        msg_error = ""
+        status, book, authors, subjects = book_info()
+        if status:
+            session['searched_book'] = book.book_id
+            return render_template('transaction.html', authors=authors, book=book, subjects=subjects, found_user=found_user, lstatus=lstatus, ltrans=ltrans, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+        else:
+            msg_error = "Book Not Found"
+            return render_template('transaction.html', msg_error=msg_error, found_user=found_user, lstatus=lstatus, ltrans=ltrans, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    return render_template('transaction.html', found_user=found_user, lstatus=lstatus, ltrans=ltrans, email=email, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+
+@app.route('/confirmborrow', methods=['GET','POST'])
+@login_required
+def confirm_borrow():
+    # if request.method == 'POST':
+    # return "BORROWS"
+    status = borrow()
+    msg_error=""
+    msg_success=""
+    if status:
+        msg_success = "Book Borrow Process Successful"
+        return render_template('transaction.html', msg_success=msg_success, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    else:
+        msg_error = "Error Occurred. Process Cancelled. There Could be No Copies Left to Borrow"
+        return render_template('transaction.html', msg_error=msg_error, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    # return redirect(url_for('trans'))
+
+@app.route('/confirmreturn/<tid>', methods=['GET','POST'])
+@login_required
+def confirm_return(tid):
+    # if request.method == 'POST':
+    status = return_books(tid)
+    msg_error=""
+    msg_success=""
+    if status:
+        msg_success = "Book Return Process Successful"
+        return render_template('transaction.html', msg_success=msg_success, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    else:
+        msg_error = "Error Occurred. Process Cancelled."
+        return render_template('transaction.html', msg_error=msg_error, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+    # return redirect(url_for('trans'))
 
 @app.route('/books', methods=['GET','POST'])
 @login_required

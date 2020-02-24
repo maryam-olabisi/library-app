@@ -1,6 +1,6 @@
-{% extends 'layout-trans.html' %}
+{% extends 'layout-admin.html' %}
 {% block title %}
-<title> ADMIN - KDU-I Library </title>
+<title> TRANSACTIONS - KDU-I Library </title>
 {% endblock %}
 
 {% block body %}
@@ -15,41 +15,104 @@
                             <i class="fa fa-pen"></i>
                     </div>
                     <div class="service-list-col2">
-                        <div>
-                            <datalist id="user">
-                                {% for u in allUsers %}
-                                <option value="{{u.user_phone_number}}">{{u.user_phone_number}}</option>
-                                {% endfor %}
-                            </datalist>
-                            <input type="text" list="user" class="form-control input-text" name="luser" id="luser" placeholder="Phone Number"
-                                required>
-                        </div>
-                        <div>
-                            <p>Transactions</p>
-                            {% for t in uTrans %}
-                            <p class="">{{t.trans_date}}</p>
-                            {% endfor %}
+                        <div class="row">
+                        <form method="post" role="form" class="registerForm">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <datalist id="user">
+                                    {% for u in allUsers %}
+                                    <option value="{{u.user_phone_number}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                                <input type="text" list="user" class="form-control input-text" name="luser" id="luser" placeholder="Phone Number"
+                                    required>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <input type="submit" name="submit" id="submit" value="View Details" class="btn wow tada btn-embossed input-btn btn-primary pull-right">
+                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>
+                <div class="service-list">
+                    <div class="service-list-col1">
+                            <i class="fa fa-pen"></i>
+                    </div>
+                    <div class="service-list-col2">
+                        <div class="row">
+                            <div class="row text-center"><h3>Transactions</h3></div>
+                            {% if lstatus %}
+                                {% for t in ltrans %}
+                                <div class="col-md-12">
+                                    <p>Borrowed <b><a href="" >{{t.book.book_name}}</a></b> on {{t.trans_date}}, to be returned on <b>{{t.trans_due_date}}</b></p>
+                                    {% if t.trans_status %}
+                                    <p>Returned <b><a href="" >{{t.book.book_name}}</a></b> on <b>{{t.trans_return_date}}</b></p>
+                                    {% else %}
+                                    <label><a href="/confirmreturn/{{t.id}}">Return "{{t.book.book_name}}" To Library?</a></label>
+                                    {% endif %}
+                                </div>
+                                
+                                {% endfor %}
+                            {% else %}
+                            <div class="col-md-9">
+                                <label class="form-label">{{ltrans}}</label>
+                            </div>
+                            {% endif %}
+                        </div>
+                   </div>
+                </div>
             </div>
-            <figure class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
+            <div class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
                 <div class="row text-center"><h3>Details</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{edept_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{edept_error}}</p></div>
-                        <div class="service-list">
+                <div class="service-list">
                             <div class="service-list-col1">
                                     <i class="fa fa-pen"></i>
                             </div>
-                            <div class="service-list-col2 pull-left">
-                                <p>Name: </p>
-                                <p>Staff Id/Matric Number:</p>
-                                <p>Phone Number:</p>
-                                <p>Email Address:</p>
-                                <p>Department:</p>
+                            <div class="service-list-col2">
+                                {% if found_user %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Name: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{found_user.user_name}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Staff Id/Matric Number: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{found_user.user_id}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Phone Number: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{found_user.user_phone_number}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email Address: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{found_user.user_mail}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Department: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{found_user.dept.dept_name}} </label>
+                                    </div>
+                                </div>
+                                {% endif %}
                             </div>
-                        </div>
-            </figure>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -66,36 +129,102 @@
                             <i class="fa fa-pen"></i>
                     </div>
                     <div class="service-list-col2">
-                        <div>
-                            <datalist id="books">
-                                {% for book in allUsers %}
-                                <option value="{{b.book_name}}">{{u.user_phone_number}}</option>
-                                {% endfor %}
-                            </datalist>
-                            <input type="text" list="bookd" class="form-control input-text" name="lbooks" id="lbooks" placeholder="Select Books"
-                                required>
+                        <div class="row">
+                            <form action="/bookTrans" method="post" role="form" class="registerForm">
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <datalist id="arrival">
+                                        {% for book in allBooks %}
+                                        <option value="{{book.book_name}}"></option>
+                                        {% endfor %}
+                                    </datalist>
+                                    <input type="text" list="arrival" class="form-control input-text" name="arrival" id="arrival" placeholder="Book Title"
+                                        required>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <input type="submit" name="submit" id="submit" value="View Details" class="btn wow tada btn-embossed input-btn btn-primary pull-right">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
             <figure class="col-lg-6 col-md-6 col-sm-6  text-right wow fadeInUp delay-02s">
                 <div class="row text-center"><h3>Details</h3></div>
-                        <div><p id="successmessage" class="text text-success">{{edept_success}}</p></div>
-                        <div><p class="text text-danger text-center">{{edept_error}}</p></div>
                         <div class="service-list">
                             <div class="service-list-col1">
                                     <i class="fa fa-pen"></i>
                             </div>
-                            <div class="service-list-col2 pull-left">
-                                <p>Name: </p>
-                                <p>Staff Id/Matric Number:</p>
-                                <p>Phone Number:</p>
-                                <p>Email Address:</p>
-                                <p>Department:</p>
+                            <div class="service-list-col2">
+                                {% if book %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Book Title: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{book.book_name}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Book Author(s): </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{authors}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Book Subject(s): </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{subjects}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Total Copies: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{book.book_total_copies}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Available Copies: </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"> {{book.book_avail_copies}} </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label><a data-toggle="modal" data-target="#confirmBorrow" class="btn wow tada btn-embossed input-btn btn-primary pull-right">Confirm Borrow</a></label>
+                                    </div>
+                                </div> 
+                                {% endif %}
                             </div>
                         </div>
             </figure>
-
+            <div class="modal fade" id="confirmBorrow" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                        {% if book %}
+                        <p>Borrow <b>{{found_user.user_name}}</b> <b>{{book.book_name}}</b> by <b>{{authors}}</b>?</p>
+                        <p>{{book.book_avail_copies}} copies available.</p>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                      <a href="/confirmborrow" class="btn btn-primary">Yes</a>
+                    </div>
+                  </div>                      
+                </div>
+            </div>
+            
         </div>
     </div>
 </section>

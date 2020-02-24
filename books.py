@@ -178,13 +178,4 @@ def update_book(bookid):
             else:
                 exSub += ", " + sub.subject_name
         db.session.commit()
-        # if author != authList[0].author_name:
-        #     authid = Author.query.filter_by(author_name=author).first()
-        #     authList[0].author_id = authid
-        # if aauthor == "":
-        #     toRemove = Author.query.filter_by(author_name=aauthor).first()
-        #     authList.remove(toRemove)
-        # elif aauthor != authList[1].author_name:
-        #     authid = Author.query.filter_by(author_name=aauthor).first()
-        #     authList[1].author_id = authid
     return True, book, exAuth, exSub, authId.id, sauthIds, subjList
