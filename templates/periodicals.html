@@ -6,6 +6,7 @@
 <section class="main-section" id="books">
     <div class="container">
         <h2>PERIODICALS</h2>
+        {% if current_user.admin %}
         <h6>ADD NEW PERIODICALS</h6>
         <div class="row">
             <form action="/periodicals" method="post" role="form" class="registerForm">
@@ -79,8 +80,9 @@
                 </div>         
             </form>
         </div>
+        {% endif %}
     <hr>
-        <h6>VIEW AND UPDATE PERIODICALS</h6>
+        <h6>VIEW {% if current_user.admin %} AND UPDATE {% endif %} PERIODICALS </h6>
         <div class="row">
             <ul class="list-group">
                 {% for p in allPeriodicals %}
@@ -92,11 +94,12 @@
                         <div class="col-md-4 col-sm-4 col-lg-4">
                             <label>{{p.periodical_day + ' ' + p.periodical_month + ', ' + p.periodical_year}}</label>                        
                         </div>
+                        {% if current_user.admin %}
                         <div class="col-md-2 col-sm-2 col-lg-2">
                             <label><a href="/periodicals/{{p.id}}">Edit</a></label>                        
                         </div>
                         <div class="col-md-2 col-sm-2 col-lg-2">
-                            <label><a data-toggle="modal" data-target="#confirmDelete">Delete</a></label>                        
+                            <label><a data-toggle="modal" data-target="#confirmDelete">Delete</a></label>                         
                         </div>
                     </div>
                     <div class="modal fade" id="confirmDelete" role="dialog">
@@ -111,7 +114,12 @@
                             </div>
                           </div>                      
                         </div>
-                    </div>                
+                    </div>   
+                    {% else %}
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <label><a href="/viewperiodicals/{{p.id}}">View</a></label>                        
+                    </div>
+                    {% endif %}             
                 </li>
                 {% endfor %}
             </ul>

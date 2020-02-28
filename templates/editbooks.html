@@ -5,7 +5,7 @@
 
 {% block body %}
 <section>
-    <h2 >Book Details</h2>
+    <h2>Book Details</h2>
     <div class="row">
         <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-3 col-md-3 col-sm-3">
             <div class="service-list">
@@ -132,13 +132,21 @@
                 </div>
             </div>
         </div>
+        {% if not current_user.admin %}
+        <div class="container row">
+            <div class="form-group">
+                <a href="/reserve/{{book.book_id}}" style="margin-top: 20px;" class="btn wow tada btn-embossed input-btn btn-primary pull-right">Reserve Book</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
 <b><hr></b>
+{% if current_user.admin %}
 <section class="main-section" >
     <!--main-section-start-->
     <div class="container">
-        <h6>Edit Book Information</h6>
+        <h3 class="text text-center">Edit Book Information</h3>
         <div class="row">
             <form action="/editbook/{{book.book_id}}" method="post" role="form" class="registerForm">
             <div class="col-lg-6 col-md-6 col-sm-6 ">
@@ -190,7 +198,7 @@
                         </div>
                         <div class="form-group">
                             <label for="notes">Notes:</label>
-                            <textarea name="notes" class="form-control input-text" id="notes" value="{{book.book_notes}}" rows="2"></textarea>
+                            <textarea name="notes" class="form-control input-text" id="notes" value="{{book.book_notes}}" rows="2">{{book.book_notes}}</textarea>
                             <div class="validation"></div>
                         </div>                   
                     </div>
@@ -261,4 +269,5 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock %}

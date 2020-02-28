@@ -179,3 +179,33 @@ def update_book(bookid):
                 exSub += ", " + sub.subject_name
         db.session.commit()
     return True, book, exAuth, exSub, authId.id, sauthIds, subjList
+
+def select_book(id):
+    book = Book.query.filter_by(book_id=id).first()
+    authors = ""
+    subjects = ""
+    mainAuth = 0
+    supAuth = 0
+    bookSubj = []
+    if book:
+        #author
+        bookAuthor = book.writers
+        for a in bookAuthor:
+            if authors == "":
+                authors = a.author_name
+                mainAuth = a.id
+            else:
+                supAuth = a.id
+                authors += (", " + a.author_name)
+        #subj
+        bookSubject = book.subjects
+        for b in bookSubject:
+            if subjects == "":
+                subjects = b.subject_name
+                bookSubj.append(b)
+            else:
+                subjects += (", " + b.subject_name)
+                bookSubj.append(b)
+        return True, book, authors, subjects, mainAuth, supAuth, bookSubj
+    else:
+        return False, "False", 0, 0, 0, 0, 0

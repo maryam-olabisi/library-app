@@ -1,0 +1,81 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> TRANSACTIONS - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<section class="main-section" id="user">
+    <div class="container">
+        <label><a href="/users">&lt;--- Back</a></label>
+        <br><br>
+        <h3>View & Edit User Information</h3>
+        <div class="row">
+            <form action="/user/{{found_user.id}}" method="post" role="form" class="registerForm">
+                <div class="col-lg-5 col-md-5 col-sm-5 wow delay-05s">
+                    <div class="service-list">
+                        <div class="service-list-col1">
+                                <i class="fa fa-pen"></i>
+                        </div>
+                        <div class="service-list-col2">
+                            <div class="form-group">
+                                <label for="name">Full Name:</label>
+                                <input type="text" name="name" class="form-control input-text" id="name" value="{{found_user.user_name}}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address:</label>
+                                <input type="email" class="form-control input-text" name="email" id="email" value="{{found_user.user_mail}}" data-rule="email" data-msg="Please enter a valid email" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dept">Department:</label>
+                                <select id="dept" class="form-control input-text" name="dept">
+                                    {% for d in allDepts %}
+                                    {%   if d.id == found_user.user_dept %}
+                                    <option value="{{d.id}}" selected>{{d.dept_name}}</option>
+                                    {% else %}
+                                    <option value="{{d.id}}">{{d.dept_name}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-2 col-lg-5 col-md-offset-2 col-md-5 col-sm-offset-2 delay-05s">
+                    <div class="service-list">
+                        <div class="service-list-col1">
+                                <i class="fa fa-pen"></i>
+                        </div>
+                        <div class="service-list-col2">
+                            <div class="form-group">
+                                <label for="userid">Staff ID/Matric Number:</label>
+                                <input type="text" class="form-control input-text" name="userid" id="userid" value="{{found_user.user_id}}" data-rule="minlen:6" data-msg="Please enter at least 6 characters" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="text" class="form-control input-text" name="phone" id="phone" value="{{found_user.user_phone_number}}" data-rule="minlen:11" data-msg="Please enter a valid Phone Number" />
+							    <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="admin">Admin:</label>
+                                <select id="admin" class="form-control input-text" name="admin">
+                                    {%   if found_user.admin %}
+                                    <option value="0">NO</option>
+                                    <option value="1" selected>YES</option>
+                                    {% else %}
+                                    <option value="0" selected>NO</option>
+                                    <option value="1">YES</option>
+                                    {%endif%}
+                                </select>   
+                            </div>
+                            <input  type="submit" name="submit" id="submit" value="Update Info" class="btn wow tada btn-embossed input-btn btn-primary pull-right">
+                        </div>
+                    </div>
+                </div>         
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

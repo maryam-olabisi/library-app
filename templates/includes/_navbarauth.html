@@ -1,0 +1,18 @@
+<nav class="main-nav-outer" id="test">
+	<div class="container">
+		<ul class="main-nav">
+			{% if current_user.admin %}
+			<li><a href="/admin">Admin Site</a></li>
+			{% endif %}
+			<li><a href="/viewbooks">Books</a></li>
+			<li><a href="/mytrans">Transactions</a></li>
+			<li class="small-logo"><a href="/"><img src="../static/img/kdulogo.png" alt=""></a></li>
+			<li><a href="/viewperiodicals">Periodicals</a></li>
+			<!-- <li><a href="/myreserves">Reservations</a></li> -->
+			{% if current_user.is_authenticated %}
+			<li><a href="{{url_for('logout')}}">Log Out</a></li>
+			{% endif %}
+		</ul>
+		<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
+	</div>
+</nav>

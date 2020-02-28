@@ -1,0 +1,128 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> USERS - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>All Users</h2>
+    <h3>Filter Results</h3>
+    <div class="row">
+        <form method="post" role="form" class="registerForm">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <datalist id="user">
+                    {% for u in allUsers %}
+                    <option value="{{u.user_phone_number}}"></option>
+                    {% endfor %}
+                </datalist>
+                <input type="text" list="user" class="form-control input-text" name="luser" id="luser" placeholder="Phone Number"
+                    required>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <input type="submit" name="submit" id="submit" value="View Details" class="btn wow tada btn-embossed input-btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form method="post" role="form" class="registerForm">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <select id="staff" class="form-control input-text" name="staff">
+                    <option value="0">Select Department</option>
+                    {% for d in allDepts %}
+                    <option value="{{d.id}}">{{d.dept_name}}</option>
+                    {% endfor %}
+                </select>              
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="text-center"><button type="submit" class="input-btn pull-left">Filter</button></div>
+            </div>
+           </form>
+    </div>
+</div>
+{% if filterResults %}
+<div class="main-section container">
+    <div class="row">
+        <h3>FILTERED RESULTS</h3>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 col-lg-5">
+                        <label><b>Name</b></label>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        <label><b>Department</b></label>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <label></label>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <label></label>
+                    </div>
+                </div>
+            </li>
+            {% for u in filterResults %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 col-lg-5">
+                        <label><a href="/user/{{u.user_phone_number}}">{{u.user_name}}</a></label>                        
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        <label>{{u.dept.dept_name}}</label>                        
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <label><a href="/transactions/{{u.id}}">Transactions</a></label>                        
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <label><a href="/user/{{u.user_phone_number}}">View & Update</a></label>                         
+                    </div>
+                </div>          
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+<section class="main-section" id="user">
+    <div class="container">
+        <div class="row">
+            <h3>ALL USERS</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-lg-5">
+                            <label><b>Name</b></label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label><b>Department</b></label>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2">
+                            <label></label>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2">
+                            <label></label>
+                        </div>
+                    </div>
+                </li>
+                {% for u in allUsers %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-lg-5">
+                            <label><a href="/user/{{u.user_phone_number}}">{{u.user_name}}</a></label>                        
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label>{{u.dept.dept_name}}</label>                        
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2">
+                            <label><a href="/transactions/{{u.id}}">Transactions</a></label>                        
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2">
+                            <label><a href="/user/{{u.user_phone_number}}">View & Update</a></label>                         
+                        </div>
+                    </div>          
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

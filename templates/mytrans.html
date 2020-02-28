@@ -1,0 +1,60 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> TRANSACTIONS - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<section class="main-section" id="user">
+    <div class="container">
+        <div class="row">
+            {% if not status %}
+            <p class="text text-center text-danger">NO TRANSACTIONS FOUND FOR USER. BORROW A BOOK TO START</p>
+            {% else %}
+            <h2>ALL TRANSACTIONS</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <h3>Book Title</h3>                        
+                        </div>                        
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <h3>Date Borrowed</h3>                        
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <h3>Due Date</h3>                        
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <h3>Returned Date</h3>                         
+                        </div>
+                    </div>          
+                </li>
+                {% for u in foundTrans %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label>{{u.book.book_name}}</label>                        
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label>{{u.trans_date.strftime("%A, %d %b %Y")}}</label>                        
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label>{{u.trans_due_date.strftime("%A, %d %b %Y")}}</label>                        
+                        </div>
+                        {% if u.trans_status %}
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label>{{u.trans_return_date.strftime("%A, %d %b %Y")}}</label>                        
+                        </div>                       
+                        {% else %}
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <label>Please Return Before Due Date</label>                        
+                        </div>
+                        {% endif %}
+                    </div>          
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

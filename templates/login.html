@@ -1,4 +1,4 @@
-{% extends 'layout-others.html' %}
+{% extends 'layout-auth.html' %}
 {% block title %}
 <title> SIGN IN - KDU-I Library </title>
 {% endblock %}
@@ -7,11 +7,16 @@
 <div class="container">
 	<section class="main-section contact" id="borrow">
 		<div class="row">
+			{% if admin_error_msg %}
+			<div><p class="text text-danger text-center">{{admin_error_msg}}</p></div>
+			{% endif %}
+		</div>
+		<div class="row">
 			<div class="col-lg-6 col-sm-7 wow fadeInLeft">
 				<div class="form">
                         <div class="row text-center"><h3>SIGN IN</h3></div>
                     
-                    <div id="errormessage"><p class="text text-danger text-center">{{error}}</p></div>
+                    <div id="errormessage"><p class="text text-danger text-center">{{msg_error}}</p></div>
                     <form action="/login" method="POST" role="form" class="loginForm">
                         <div class="form-group">
                             <input type="text" name="userid" class="form-control input-text" id="userid" placeholder="Matric Number/Staff ID" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />

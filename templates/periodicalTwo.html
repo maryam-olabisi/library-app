@@ -1,0 +1,28 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title> ADMIN - KDU-I Library </title>
+{% endblock %}
+{% block body %}
+<section class="main-section">
+    <div class="container">
+        <label><a href="/viewperiodicals">&lt; Back</a></label> 
+        <h2>PERIODICALS</h2>
+        <h6>PERIODICALS DETAILS</h6>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label>{{period.periodical_name}}</label>                        
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label>{{period.periodical_day + ' ' + period.periodical_month + ', ' + period.periodical_year}}</label>                        
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-md-7 col-sm-7 col-lg-7">
+                <h5>Headlines</h5>
+                <p>{{period.periodical_details}}</p>
+            </div>
+        </div>      
+    </div>
+</section>
+{% endblock %}

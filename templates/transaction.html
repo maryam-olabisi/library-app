@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="row text-center"><h3>Transactions</h3></div>
                             {% if lstatus %}
-                                {% for t in ltrans %}
+                                {% for t in ltrans %} 
                                 <div class="col-md-12">
                                     <p>Borrowed <b><a href="" >{{t.book.book_name}}</a></b> on {{t.trans_date}}, to be returned on <b>{{t.trans_due_date}}</b></p>
                                     {% if t.trans_status %}

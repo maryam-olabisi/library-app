@@ -20,6 +20,11 @@ def trans_list(id):
     else:
         return False, "No Transactions Found"
 
+def trans_list_user(id):
+    id_use = User.query.get(int(id))
+    return trans_list(id_use.user_id), id_use
+
+
 def book_info():
     book_name = request.form.get('arrival')
     book = Book.query.filter_by(book_name=book_name).first()
