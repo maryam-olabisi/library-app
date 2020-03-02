@@ -216,7 +216,7 @@ def getdept():
 @app.route('/viewbooks', methods=['GET'])
 @login_required
 def view_books():
-    return render_template('allbooks.html', allBooks=allBooks, currentYear=currentYear)
+    return render_template('allbooks.html', allBooks=allBooks, allPubs=allPubs, currentYear=currentYear)
 
 @app.route('/transactions/all', methods=['GET','POST'])
 @login_required
