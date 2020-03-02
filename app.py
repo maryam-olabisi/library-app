@@ -67,7 +67,7 @@ def login():
             if staff.admin:
                 return redirect(url_for('admin'))
             else:
-                return redirect(url_for('homepage'))
+                return redirect(url_for('view_books'))
             # return render_template('admin.html', allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
         else:
             errorM = "One of given fields is Incorrect. Try Again."
