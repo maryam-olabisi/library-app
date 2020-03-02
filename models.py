@@ -12,7 +12,7 @@ app = Flask("__name__")
 app.config.from_object('settings')
 # app.config.from_pyfile('config.cfg')
 # db = SQLAlchemy(app)
-db = SQLAlchemy(app, session_options{
+db = SQLAlchemy(app, session_options = {
     'expire_on_commit': False
 })
 
