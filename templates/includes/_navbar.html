@@ -7,7 +7,11 @@
 			<li class="small-logo"><a href="#header"><img src="static/img/kdulogo.png" alt=""></a></li>
 			<li><a href="#journals">Journals</a></li>
 			<li><a href="#opens">Open Source</a></li>
+			{% if current_user.is_authenticated %}
+			<li><a href="/viewbooks">Borrow</a></li>
+			{% else %}
 			<li><a href="#borrow">Borrow</a></li>
+			{% endif %}
 		</ul>
 		<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
 	</div>

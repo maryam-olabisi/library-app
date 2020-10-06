@@ -1,0 +1,139 @@
+{% extends 'layout-others.html' %}
+{% block title %}
+<title> RULES - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <section class="main-section contact" id="borrow">
+        <h3 class="text text-center"><b>ELECTRONIC BOOKS AND JOURNALS </b></h3>
+        <br>
+        <div class="row">
+            <div class="col-md-3" style="text-align:left;">
+                <div class="list-group">
+                    <a onclick="show_eb()" class="list-group-item">E-BOOKS</a>
+                    <a onclick="show_ej()" class="list-group-item">E-JOURNALS</a>
+                </div>
+            </div>
+            <div class="col-md-3" id="divJour" style="display:none;">
+                <div id="showDB">
+                    <label><b><a onclick="show_ac()">Analytical Chemistry</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_els()">English & Literary Studies</a></b></label>
+                </div>
+                <div id="showBL">
+                    <label><b><a onclick="show_ht()">History</a></b></label>
+                </div>
+                <div id="showBL">
+                    <label><b><a onclick="show_hds()">History & Diplomatic Studies</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_ibm()">Industrial & Business Management</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_ic()">Inorganic Chemistry</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_oc()">Organic Chemistry</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_mmj()">Mass Media & Journalism</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_pe()">Physics With Electronics</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_sc()">Sociology</a></b></label>
+                </div>
+            </div>
+            <div class="col-md-3" id="divBooks" style="display:block;">
+                <div id="showDB">
+                    <label><b><a onclick="show_bi()">Biology</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_bum()">Business Management</a></b></label>
+                </div>
+                <div id="showBL">
+                    <label><b><a onclick="show_coa()">Cost Accounting</a></b></label>
+                </div>
+                <div id="showBL">
+                    <label><b><a onclick="show_eco()">Economics</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_engl()">English Language</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_fren()">French Language</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_hist()">History</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_lit()">Literature</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_maco()">Mass Communication</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_phys()">Physics</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_polec()">Political Economy</a></b></label>
+                </div>
+                <div id="showDB">
+                    <label><b><a onclick="show_polsci()">Political Science</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_resmet()">Research Methodology</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_stats()">Statistics</a></b></label>
+                </div>
+            </div>
+            <div class="col-md-6 pull-left">
+                <div class="row" id="divBi" style="display:block;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/home/maryam-olabisi/Documents/KDUI-LIBRARY/books/Electronic Books/BIOLOGY BOOKS/Biology 8th ed by Campbell and Reece.pdf">Biology, Campbell</a></li>
+                        <li class="list-group-item"><a href="../books/Electronic Books/BIOLOGY BOOKS/BIOLOGY.pdf">Biology</a></li>
+                        <li class="list-group-item"><a href="../books/Electronic Books/BIOLOGY BOOKS/BOTANY Higher Secondary Second Year - Textbooks Online.pdf">Botany</a></li>
+                        <li class="list-group-item"><a href="../books/Electronic Books/BIOLOGY BOOKS/GOOD BIO TEXT TOO.PDF">Biology</a></li>
+                        <li class="list-group-item"><a href="../books/Electronic Books/BIOLOGY BOOKS/MICROBIOLOGY TEXT WITH REVISION QUESTIONS.pdf">Microbiology</a></li>
+                    </ul>
+                </div>
+
+                <div class="row" id="divBum" style="display:none;">
+                    
+                </div>
+
+                <div class="row" id="divCoa" style="display:none;">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    function show_ej(){
+        document.getElementById("divJour").style.display="block";
+        document.getElementById("divBooks").style.display="none";    }
+
+    function show_eb(){
+        document.getElementById("divJour").style.display="none";
+        document.getElementById("divBooks").style.display="block";
+    }
+
+    function show_bl(){
+        document.getElementById("divDB").style.display="none";
+        document.getElementById("divSE").style.display="none";
+        document.getElementById("divBL").style.display="block";
+    }
+
+    function show_ls(){
+        //show a list
+        document.getElementById("divDB").style.display="none";
+        document.getElementById("divSE").style.display="none";
+        document.getElementById("divBL").style.display="block";
+    }
+</script>
+{% endblock %}

@@ -12,13 +12,25 @@ app = Flask("__name__")
 app.config.from_object('settings')
 # app.config.from_pyfile('config.cfg')
 # db = SQLAlchemy(app)
-db = SQLAlchemy(app, session_options = {
-    'expire_on_commit': False
-})
+# db = SQLAlchemy(app, session_options = {
+#     'expire_on_commit': False
+# })
 
 migrate = Migrate(app,db)
 manager = Manager(app,db)
 manager.add_command('db', MigrateCommand)
+
+class Reservations(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    reserve_name =  db.Column(db.String(500), unique=False)
+    reserve_time = db.Column(db.DateTime, unique=False)
+    reserve_book_name = db.Column(db.String(500), unique=False)
+    reserve_status = db.Column(db.Boolean, unique=False)
+
+    def __init__(self, reserve_name, reserve_time, reserve_book_name):
+        self.reserve_name = reserve_name
+        self.reserve_time = reserve_time
+        self.reserve_book_name = reserve_book_name
 
 class Periodicals(db.Model):
     id = db.Column(db.Integer, primary_key=True)

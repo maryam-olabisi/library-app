@@ -1,0 +1,568 @@
+{% extends 'layout-others.html' %}
+{% block title %}
+<title> BOOKS - KDU-I Library </title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <section class="main-section contact" id="borrow">
+        <h3 class="text text-center"><b>LIST OF ACADEMIC DATABASES, SEARCH ENGINES AND BOOK SITES </b></h3>
+        <br>
+        <div class="row">
+            <div class="col-md-3" style="text-align:left;">
+                <div id="showDB">
+                    <label><b><a onclick="show_db()">ACADEMIC DATABASES</a></b></label>
+                </div>
+                <div id="showSE">
+                    <label><b><a onclick="show_se()">ACADEMIC SEARCH ENGINES</a></b></label>
+                </div>
+                <div id="showBL">
+                    <label><b><a onclick="show_bl()">ELECTRONIC BOOK SITES</a></b></label>
+                </div>
+                <div>
+                    <label><b><a href="caccess">ELECTRONICS MATERIALS</a></b></label>
+                </div>
+            </div>
+            <div class="col-md-9 pull-left">
+                <div class="row" id="divDB" style="display:block;">
+                    <div class="table">
+                                <table class="table table-striped table-bordered">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">S/N</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Subject/Discipline</th>
+                                        <th scope="col">URL & Descripion</th>
+                                        <th scope="col">Providers</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Analytical sciences digital library</td>
+                                            <td>Analytical chemistry</td>
+                                            <td><a href="https://home.asdlib.org/">ASDLIB</a></td>
+                                            <td><p>National Science Digital Library and the Analytical Chemistry Division of the American Chemical Society</p></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>AGRIS: Agricultural database</td>
+                                            <td>Agriculture</td>
+                                            <td><a href="http://agris.fao.org/agris-search/index.do">AGRIS</a></td>
+                                            <td>Food and Agriculture Organization of the United Nations. AGRIS
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Arnetminer</td>
+                                            <td>Computer Science</td>
+                                            <td><a href="https://aminer.org/">AMINER</a>
+                                                <br>Online service used to index and search academic social networks</td>
+                                            <td>Tsinghua University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td>arXiv</td>
+                                            <td>Physics, Mathematics, <br>Computer science, <br>Nonlinear sciences, <br>Quantitative biology & Statistics</td>
+                                            <td><a href="https://arxiv.org/">ARXIV</a></td>
+                                            <td>Cornell University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <td>Astrophysics Data System</td>
+                                            <td>Astrophysics, Geophysics, Physics</td>
+                                            <td><a href="https://ui.adsabs.harvard.edu/">ADS</a></td>
+                                            <td>Harvard University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <td>Bioinformatic Harvester</td>
+                                            <td>Biology, Bioinformatics</td>
+                                            <td><a href="https://www.embl.de/research/interdisciplinary_research/bioinformatics/services/list-of-services/#Databases">EMBL Databases</a><br>A meta search engine for 50 major bioinformatic databases and projects.</td>
+                                            <td>Available from Liebel-Lab KIT Karlsruhe Institute of Technology</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <td>CiteULike</td>
+                                            <td>Computer Science</td>
+                                            <td><a href=""></a></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <td>CiteSeerX</td>
+                                            <td>Computer science, Statistics, Mathematics,<br>(becoming Multidisciplinary)</td>
+                                            <td><a href="http://csxstatic.ist.psu.edu/">CiteSeerX</a></td>
+                                            <td>Pennsylvania State University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">9</th>
+                                            <td>CogPrints: Cognitive Sciences Eprint Archives</td>
+                                            <td>Science (General)</td>
+                                            <td><a href="http://cogprints.org/">CogPrints</a>,<br><a href="https://www.ecs.soton.ac.uk/research/publications">SOTON</a></td>
+                                            <td>University of Southampton</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">10</th>
+                                            <td>The Collection of Computer Science Bibliographies</td>
+                                            <td>Computer Science</td>
+                                            <td><a href="https://www.southampton.ac.uk/~harnad/">CCSB</a></td>
+                                            <td>Alf-Christian Achilles</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">11</th>
+                                            <td>Directory of Open Access Journal</td>
+                                            <td>Journals</td>
+                                            <td><a href="https://doaj.org/subjects">The Directory of Open Access Journals (DOAJ)</a></td>
+                                            <td>Lund University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">12</th>
+                                            <td>dblp computer science bibliography</td>
+                                            <td>Computer Science</td>
+                                            <td><a href="https://dblp.org/db/journals/publ/wi.html">DBLP Journals</a>,<br>
+                                            <a href="https://dblp.uni-trier.de/">DBLP</a><br>
+                                            <p>Comprehensive list of papers from major computer science conferences and journals</p>
+                                            </td>
+                                            <td>Schloss Dagstuhl - Leibniz Center for Informatics and University of Trier, Germany</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">13</th>
+                                            <td>EconBiz</td>
+                                            <td>Economics</td>
+                                            <td><a href="https://www.econbiz.de/">EconBiz</a><br>Supports research in and teaching of economics with a central entry point for all kinds of subject-specific information and direct access to full texts</td>
+                                            <td>ZBW- German National Library of Economics– Leibniz Information Centre for Economics (ZBW)</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">14</th>
+                                            <td>COnnecting REpositories</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://core.ac.uk/">Core</a>,<br><a href="https://www.jisc.ac.uk/core">Core</a></td>
+                                            <td>Open University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">15</th>
+                                            <td>ERIC: Educational Resource Information Center</td>
+                                            <td>Education</td>
+                                            <td><a href="https://hkbu.libguides.com/c.php?g=150731&p=1281057">Education Literature & Resources</a></td>
+                                            <td>United States Department of Education. Also available by subscription from OCLC, CSA.</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">16</th>
+                                            <td>Europe PMC</td>
+                                            <td>Biomedical</td>
+                                            <td><a href="https://europepmc.org/">Europe PMC</a></td>
+                                            <td>EMBL-EBI</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">17</th>
+                                            <td>GENESIS</td>
+                                            <td>Women's History</td>
+                                            <td><a href="http://www.lse.ac.uk/Library/Collections/Collection-highlights/The-Womens-Library">Women's History</a><br>Collection from sources accross UK</td>
+                                            <td>London Metropolitan University</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">18</th>
+                                            <td>Index Copernicus</td>
+                                            <td>Multidisciplinary Science</td>
+                                            <td><a href="https://journals.indexcopernicus.com/">The JC Journal Master List</a></td>
+                                            <td>Index Copernicus International</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">19</th>
+                                            <td>Information Bridge: Department of Energy Scientific and Technical Information</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://www.osti.gov/search ">DOE Scientific & Technical Information</a></td>
+                                            <td>United States Department of Energy, Office of Scientific and Technical Information</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">20</th>
+                                            <td>IARP</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://iarp.org/">Open access Knowledge Management System</a></td>
+                                            <td>Volunteer Collaboration</td>
+                                        </tr>
+                                        <tr>                           
+                                            <th scope="row">21</th>
+                                            <td>INSPIRE-HEP</td>
+                                            <td>Physics, (High Energy)</td>
+                                            <td><a href="http://inspirehep.net/?ln=en">Inspire Help</a></td>
+                                            <td>CERN, DESY, Fermilab, SLAC and IHEP</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">22</th>
+                                            <td>Lingbuzz</td>
+                                            <td>Linguistics</td>
+                                            <td><a href="https://ling.auf.net/lingbuzz">Lingbuzz</a><br>
+                                                A free archive of linguistics articles, with a focus on syntax, semantics, phonology and morphology.</td>
+                                            <td>Center for Advanced Study in Theoretical Linguistics, University of Tromsø</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">23</th>
+                                            <td>Mendeley</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://www.mendeley.com">Mendeley</a><br>
+                                                A crowdbased database of research documents.</td>
+                                            <td>Mendeley</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">24</th>
+                                            <td>Microsoft Academic</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://academic.microsoft.com/home">Microsoft Academy</a><br>
+                                                Provides many innovative ways to explore scientific papers, conferences, journals, and authors</td>
+                                            <td>Microsoft</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">25</th>
+                                            <td>MyScienceWork</td>
+                                            <td>Science</td>
+                                            <td><a href="https://www.mysciencework.com/">MyScienceWork</a><br>Database includes more than 70 million scientific publications and 12 million patents.</td>
+                                            <td>MyScienceWork</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">26</th>
+                                            <td>NBER: National Bureau of Economic Research</td>
+                                            <td>Economics</td>
+                                            <td><a href="https://www.nber.org/">NBER</a>
+                                            </td>
+                                            <td>National Bureau of Economic Research</td>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">27</th>
+                                                <td>National Criminal Justice Reference Service</td>
+                                                <td>Criminology, Sociology</td>
+                                                <td><a href="https://www.ncjrs.gov/">NCJRS</a><br>
+                                                    Abstracts of scholarly journal articles, agency and NGO reports, and conference proceedings
+                                                </td>
+                                                <td>United States Department of Justice, Office of Justice Programs[106]</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">28</th>
+                                            <td>OAIster</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://www.oclc.org/en/oaister.html">OCLC</a>
+                                            <td>OCLC</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">29</th>
+                                            <td>OpenEdition.org</td>
+                                            <td>Humanities, social science</td>
+                                            <td><a href="https://journals.openedition.org/?lang=en">OpenEdition</a></td>
+                                            <td>Cléo (UMS 3287) CNRS EHESS University of Avignon</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">30</th>
+                                            <td>OpenSIGLE</td>
+                                            <td>Grey literature</td>
+                                            <td><a href="http://www.greynet.org/opensiglerepository.html">European grey literature Indexes</a></td>
+                                            <td>Institut de l'information scientifique et technique</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">31</th>
+                                            <td>Paperity</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://paperity.org/">Paperity</a><br>
+                                                Aggregator of open access journals and papers. Provides full-text article search, RSS feeds and a mobile application to access the literature.</td>
+                                            <td>Paperity</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">32</th>
+                                            <td>PubChem</td>
+                                            <td>Chemistry</td>
+                                            <td><a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a></td>
+                                            <td>National Center for Biotechnology Information and the U.S. National Library of Medicine</td>
+                                         </tr>
+                                         <tr>
+                                            <th scope="row">33</th>
+                                            <td>PubMed</td>
+                                            <td>Biomedical</td>
+                                            <td><a href="https://www.ncbi.nlm.nih.gov/pubmed/">PubMed</a><br>A database primarily of references and abstracts on life sciences and biomedical topics</td>
+                                            <td>National Institutes of Health and the U.S. National Library of Medicine</td>
+                                         </tr>
+                                        <tr>
+                                            <th scope="row">34</th>
+                                            <td>RePEc: Research Papers in Economics</td>
+                                            <td>Economics</td>
+                                            <td><a href="http://repec.org/">RePEc</a>,<br><a href="http://fmwww.bc.edu/repec/repecold.html">RePEc</a></td>
+                                            <td>Volunteer Collaboration</td>
+                                        </tr>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">35</th>
+                                            <td>Russian Science Citation Index</td>
+                                            <td>Scientific journals</td>
+                                            <td><a href="https://clarivate.libguides.com/webofscienceplatform/rsci">
+                                                    A bibliographic database of scientific publications in Russian</a></td>
+                                            <td>Scientific Electronic Library]</td>
+                                         </tr>
+                                         <tr>
+                                             <th scope="row">36</th>
+                                             <td>SafetyLit</td>
+                                             <td>Multidisciplinary</td>
+                                             <td><a href="https://www.safetylit.org/">SafetyLit</a><br>Citations and abstracts of journal articles and reports from researchers working in the more than 35 distinct professional disciplines (architecture - zoology) relevant to preventing unintentional injuries, violence, and self-harm.</td>
+                                             <td>SafetyLit Foundation in cooperation with the Graduate School of Public Health, San Diego State University and the World Health Organization's Department of Violence and Injury Prevention</td>
+                                         </tr>
+                                         <tr>
+                                             <th scope="row">37</th>
+                                             <td>SciELO</td>
+                                             <td>Journals</td>
+                                             <td><a href="https://www.scielo.org/en/">Scielo</a><br>A bibliographic database and a model for cooperative electronic publishing in developing countries originally from Brazil.</td>
+                                             <td>FAPESP, CNPq and BIREME</td>
+                                         </tr>
+                                        <tr>
+                                            <th scope="row">38</th>
+                                            <td>Science.gov</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://www.science.gov/">Science.gov</a><br> Provides a search of over 45 scientific databases and 200 million pages of science information with just one query, and is a gateway to over 2000 scientific Websites</td>
+                                            <td>United States Department of Energy, Office of Scientific and Technical Information</td>
+                                        </tr>
+                                         <tr>
+                                            <th scope="row">39</th>
+                                            <td>Science Accelerator</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="http://www.scienceaccelerator.gov/resourcedescriptions.shtml">A gateway to results of DOE research and development and major R&D accomplishments of interest to DOE.</a></td>
+                                            <td>United States Department of Energy, Office of Scientific and Technical Information</td>    
+                                         </tr>
+                                        <tr>
+                                            <th scope="row">40</th>
+                                            <td>Scientific Information Database (SID)</td>
+                                            <td>Engineering & Technology, Medical Science, Basic Science, Human Sciences</td>
+                                            <td><a href="https://www.sid.ir/en/journal/">SID</a><br>A free bank with multipurpose goals, containing Engineering & Technology, Medical, Basic Science, Human Sciences papers.</td>
+                                            <td>Scientific Information Database</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">41</th>
+                                            <td>SCIndeks - Serbian Citation Index</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://scindeks.ceon.rs/default.aspx?lang=en">SCIndeks</a><br>A combination of an online multidisciplinary bibliographic database, a national citation index, an Open Access full-text journal repository and an electronic publishing platform.</td>
+                                            <td>CEON/CEES - Centre for Evaluation in Education and Science, Serbia</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">42</th>
+                                            <td>Semantic Scholar</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://www.semanticscholar.org/">Semantic Scholar</a><br>Designed to quickly highlight the most important papers and identify the connections between them. It currently includes on computer science and biomedical publications.</td>
+                                            <td>Allen Institute for Artificial Intelligence</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">43</th>
+                                            <td>SSRN: Social Science Research Network</td>
+                                            <td>Social science</td>
+                                            <td><a href="https://www.ssrn.com/index.cfm/en/">SSRN</a><br>Contains an abstracts database and an electronic paper collection, arranged by discipline</td>
+                                            <td>Social Science Electronic Publishing, Inc</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">44</th>
+                                            <td>INSPIRE-HEP</td>
+                                            <td>Physics, (High Energy)</td>
+                                            <td><a href="http://inspirehep.net/?ln=en">INSPIRE-HEP</a></td>
+                                            <td>CERN, DESY, Fermilab, SLAC and IHEP</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">45</th>
+                                            <td>VET-Bib</td>
+                                            <td>Social Science, Education</td>
+                                            <td><a href="http://libserver.cedefop.europa.eu/">libserver</a>,<br><a href="http://cva-acfp.org/article-tag/database-vet-bib/">European vocational education and training (VET) literature</a></td>
+                                            <td>European Centre for the Development of Vocational Training</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">46</th>
+                                            <td>PMC Journals</td>
+                                            <td>Nursing, Health Sciences & Microbiology</td>
+                                            <td><a href="https://www.ncbi.nlm.nih.gov/pmc/">PMC</a><br>A free full-text archive of literature at the U.S. National Institutes of Health’s National Library of Medicine (NIH/NLM).</td>
+                                            <td>Health & Medical Sciences</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">47</th>
+                                            <td>BMC</td>
+                                            <td>Medical and Health Sciences, Malaria Journal and Microbiome, and the BMC Series</td>
+                                            <td><a href="https://www.biomedcentral.com/">BMC</a><br>an evolving portfolio of high quality peer-reviewed journals including broad interest titles on Medical and Health Sciences.</td>
+                                            <td>Health & Medical Sciences</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">48</th>
+                                            <td>Hindawi</td>
+                                            <td>Health & Medical Sciences</td>
+                                            <td><a href="https://www.hindawi.com/">Hindawi</a></td>
+                                            <td>Health & Medical Sciences</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">49</th>
+                                            <td>SCIENCE ALERT</td>
+                                            <td>Sciences</td>
+                                            <td><a href="http://scialert.net/journals.php">Science Alert</a></td>
+                                            <td>General</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">50</th>
+                                            <td>Scientific Research Publishing</td>
+                                            <td>Science, Technology & Medicine</td>
+                                            <td><a href="http://www.scirp.org">SCIRP</a></td>
+                                            <td>Sciences</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">51</th>
+                                            <td>OMICS GROUP</td>
+                                            <td>Academic Books</td>
+                                            <td><a href="http://omicsonline.org/open-access-journals-list.php">OMICS</a></td>
+                                            <td>Science and Technology</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                    </div>
+                </div>
+
+                <div class="row" id="divSE" style="display:none;">
+                    <div class="table">
+                                <table class="table table-striped table-bordered">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">S/N</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Subject/Discipline</th>
+                                        <th scope="col">URL & Descripion</th>
+                                        <th scope="col">Providers</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>BASE: Bielefeld Academic Search Engine</td>
+                                                    <td>Multidisciplinary</td>
+                                                    <td><a href="https://www.base-search.net/about/en/about_sources_date.php">BASE</a></td>
+                                                    <td>Bielefeld University</td>
+                                                </tr>
+        <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Citebase Search</td>
+                                                    <td>Mathematics, Computer science, Physics</td>
+                                                    <td><a href="https://www.researchgate.net/publication/37538217"> Citation Database</a><br><a href="https://eprints.soton.ac.uk/260677/">Citation Index</a></td>
+                                                    <td>University of Southampton</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>DOAJ</td>
+                                                    <td>Nursing</td>
+                                                    <td><a href="https://doaj.org/">DOAJ</a><br>A community-curated online directory that indexes and provides access to high quality, open access, peer-reviewed journals.</td>
+                                                    <td>General</td>
+                                                </tr> 
+        <tr>
+                                                    <th scope="row">4</th>
+                                                    <td>Jurn</td>
+                                                    <td>Multidisciplinary</td>
+                                                    <td><a href="https://jurnsearch.wordpress.com/">Jurn</a><br>
+                                                        Jurn is a free-to-use online search tool for finding and downloading free full-text scholarly works. Jurn is actively curated and maintained.
+                                                    </td>
+                                                    <td>Jurn</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <th scope="row">5</th>
+                                                    <td>ScienceOpen</td>
+                                                    <td>Multidisciplinary</td>
+                                                    <td><a href="https://www.scienceopen.com/">Search engine for natural and physical sciences, social sciences, and humanities</a><br>Incorporates arXiv, PubMed, and SciELO. Integrated with ORCID for overlay and peer review services. All articles display Altmetric scores</td>
+                                                    <td>ScienceOpen</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">6</th>
+                                                    <td>SearchTeam</td>
+                                                    <td>Multidisciplinary</td>
+                                                    <td><a href="http://searchteam.com/">SearchTeam</a><br>Collaborative search platform for students</td>
+                                                    <td>Zakta</td>
+                                                </tr>
+        
+                                                <tr>
+                                                    <th scope="row">7</th>
+                                                    <td>Sparrho</td>
+                                                    <td>Multidisciplinary</td>
+                                                    <td><a href="https://www.sparrho.com/?utm_source=about&utm_medium=referral&utm_campaign=home_btn#Sparrho">Sparrho</a><br>A personalised platform that allows users to discover, curate and share over 60 million scientific research articles and patents from 45k+ journals and preprint servers</td>
+                                                    <td>Sparrho</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">8</th>
+                                                    <td>WorldWideScience</td>
+                                                    <td>Multidisciplinary</td>
+                                                    <td><a href="http://www.unesco.org/new/en/communication-and-information/portals-and-platforms/goap/thematic-areas/sciences/worldwidescience/">UNESCO</a>,<br>
+                                                    <a href="https://worldwidescience.org/wws/desktop/en/search.html">WorldWideScience</a></td>
+                                                    <td>The WorldWideScience Alliance, United States Department of Energy, Office of Scientific and Technical Information</td>
+                                                </tr>
+                                                
+                                    </tbody>
+                                </table>
+                            
+                    </div>
+                </div>
+
+                <div class="row" id="divBL" style="display:none;">
+                        <div class="table">
+                                <table class="table table-striped table-bordered">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th scope="col">S/N</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Subject/Discipline</th>
+                                        <th scope="col">URL & Descripion</th>
+                                        <th scope="col">Providers</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>BookBoon</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://bookboon.com/">Bookboon</a></td>
+                                            <td><p>Bookboon</p></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>bookFi</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="http://bookfi.net/">BookFi</a></td>
+                                            <td><p>BookFi</p></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Bookyards</td>
+                                            <td>Multidisciplinary</td>
+                                            <td><a href="https://www.bookyards.com/mobile/authors.php">Bookyards</a></td>
+                                            <td><p>Bookyards</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            
+                            </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    function show_db(){
+        document.getElementById("divDB").style.display="block";
+        document.getElementById("divSE").style.display="none";
+        document.getElementById("divBL").style.display="none";
+    }
+
+    function show_se(){
+        document.getElementById("divDB").style.display="none";
+        document.getElementById("divSE").style.display="block";
+        document.getElementById("divBL").style.display="none";
+    }
+
+    function show_bl(){
+        document.getElementById("divDB").style.display="none";
+        document.getElementById("divSE").style.display="none";
+        document.getElementById("divBL").style.display="block";
+    }
+
+    function show_ls(){
+        //show a list
+        document.getElementById("divDB").style.display="none";
+        document.getElementById("divSE").style.display="none";
+        document.getElementById("divBL").style.display="block";
+    }
+</script>
+<!-- {% include 'includes/_jsc.html' %} -->
+{% endblock %}

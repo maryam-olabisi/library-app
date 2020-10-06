@@ -11,7 +11,7 @@ import datetime
 app = Flask("__name__")
 app.config.from_object('settings')
 # app.config.from_pyfile('config.cfg')
-db.init_app(app)
+# db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -216,7 +216,7 @@ def getdept():
 @app.route('/viewbooks', methods=['GET'])
 @login_required
 def view_books():
-    return render_template('allbooks.html', allBooks=allBooks, allPubs=allPubs, currentYear=currentYear)
+    return render_template('allbooks.html', allBooks=allBooks, allPubs=allPubs, currentYear=currentYear, allTransactions=allTransactions, allUsers=allUsers, allAuthors=allAuthors, allSubj=allSubj, allDepts=allDepts, allPeriodicals=allPeriodicals)
 
 @app.route('/transactions/all', methods=['GET','POST'])
 @login_required
@@ -233,6 +233,47 @@ def user_trans(id):
     foundTrans = found_trans[1]
     lstatus = found_trans[0]
     return render_template('usertrans.html', lstatus=lstatus, foundTrans=foundTrans, found_user=found_user, allUsers=allUsers, allDepts=allDepts, currentYear=currentYear, allSubj=allSubj, allAuthors=allAuthors, allPubs=allPubs, allBooks=allBooks)
+
+
+@app.route('/reserve/<id>', methods=['GET','POST'])
+@login_required
+def reserve(id):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    name = current_user.user_name
+    status = reserve_book(id, name)
+    if status:
+        msg_success = "Book Reserved. Please Visit The Library to Complete Transaction."
+        return render_template('allbooks.html', msg_success=msg_success, allBooks=allBooks, allPubs=allPubs, currentYear=currentYear, allTransactions=allTransactions, allUsers=allUsers, allAuthors=allAuthors, allSubj=allSubj, allDepts=allDepts, allPeriodicals=allPeriodicals)
+    else:
+        msg_error = "Cannot Reserve Book. Visit the University Library for More Information."
+        return render_template('allbooks.html',msg_error=msg_error, msg_success=msg_success, allBooks=allBooks, allPubs=allPubs, currentYear=currentYear, allTransactions=allTransactions, allUsers=allUsers, allAuthors=allAuthors, allSubj=allSubj, allDepts=allDepts, allPeriodicals=allPeriodicals)
+
+@app.route('/myreserves', methods=['GET'])
+@login_required
+def resve():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    username = current_user.user_name
+    status = ""
+    foundTrans = Reservations.query.filter_by(reserve_name=username).all()
+    if foundTrans:
+        status = True
+    else:
+        status = False
+    return render_template('myreserves.html', status=status, foundTrans=foundTrans, allAuthors=allAuthors, currentYear=currentYear, allBooks=allBooks, allDepts=allDepts, allSubj=allSubj, allPubs=allPubs)
+
+@app.route('/reservations', methods=['GET','POST'])
+@login_required
+@admin_required
+def adm_rese():
+    foundTrans = Reservations.query.all()
+    status = ""
+    if foundTrans:
+        status = True
+    else:
+        status = False
+    return render_template('myreserves.html', status=status, foundTrans=foundTrans, allAuthors=allAuthors, currentYear=currentYear, allBooks=allBooks, allDepts=allDepts, allSubj=allSubj, allPubs=allPubs)
 
 @app.route('/transactions', methods=['GET','POST'])
 @login_required
@@ -415,7 +456,7 @@ def mytransc(id):
 @login_required
 def mytransct():
     status, foundTrans = trans_list(current_user.user_id)
-    return render_template('mytrans.html', status=status, foundTrans=foundTrans)
+    return render_template('mytrans.html', status=status, foundTrans=foundTrans, allAuthors=allAuthors, currentYear=currentYear, allBooks=allBooks, allDepts=allDepts, allSubj=allSubj, allPubs=allPubs)
 
 @app.route('/periodicals', methods=['GET','POST'])
 @login_required

@@ -24,6 +24,19 @@ def trans_list_user(id):
     id_use = User.query.get(int(id))
     return trans_list(id_use.user_id), id_use
 
+def reserve_book(id, user_name):
+    book = Book.query.filter_by(book_id=id).first()
+    book_name = book.book_name
+    if not book_name:
+        return False
+    try:
+        new_reserve = Reservations(user_name, datetime.datetime.now(), book_name)
+        new_reserve.reserve_status = False
+        db.session.add(new_reserve)
+        db.session.commit()
+        return True
+    except expression as identifier:
+        return False
 
 def book_info():
     book_name = request.form.get('arrival')
@@ -48,6 +61,18 @@ def book_info():
         return True, book, authors, subjects
     else:
         return False, "False", 0, 0
+
+def borrows(bookid, userid):
+    found_book = Book.query.filter_by(book_id=bookid).first()
+    #check book availability
+    if found_book.book_avail_copies == 0:
+        return False, "No Copies Left To Borrow"
+    else:
+        new_trans = Transaction(bookid, 0, datetime.datetime.now() + datetime.timedelta(weeks=1), userid, datetime.datetime.now())
+        db.session.add(new_trans)
+        found_book.book_avail_copies -= 1
+        db.session.commit()
+        return True
 
 def borrow():
     userid = session.get('searched_user', None)
